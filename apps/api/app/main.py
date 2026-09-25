@@ -26,18 +26,24 @@ _FIREBASE_PROJECT_ID = os.getenv("FIREBASE_PROJECT_ID", "clipai-4bb71")
 _db = None
 _USE_SDK_VERIFY = False
 
-if _HAS_SA:
-    _cred = credentials.Certificate(_cred_path)
-    firebase_admin.initialize_app(_cred)
+try:
+    if _HAS_SA:
+        _cred = credentials.Certificate(_cred_path)
+        firebase_admin.initialize_app(_cred)
+    else:
+        # Use Application Default Credentials (ADC) for Cloud Run
+        firebase_admin.initialize_app(options={'projectId': _FIREBASE_PROJECT_ID})
+    
     from firebase_admin import auth as _fb_auth
     _db = firestore.client()
     _USE_SDK_VERIFY = True
-else:
-    print("⚠️  No serviceAccountKey.json — Firestore disabled. Download it from Firebase console → Project settings → Service accounts.")
+    print("✅ Firebase initialized successfully.")
+except Exception as e:
+    print(f"⚠️  Firebase initialization failed: {e}")
 
 def _get_db():
     if _db is None:
-        raise HTTPException(status_code=503, detail="Server not fully configured. serviceAccountKey.json missing. See README.")
+        raise HTTPException(status_code=503, detail="Server not fully configured for Firestore.")
     return _db
 
 def db_col(path: str):
