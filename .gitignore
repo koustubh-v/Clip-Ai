@@ -1,0 +1,31 @@
+# Node.js
+node_modules/
+dist/
+build/
+.env*
+!*.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+.env
+
+# API specifics
+serviceAccountKey.json
+gcp-key.json
+uploads/
+thumbnails/
+audio/
+
+# System
+.DS_Store
+.vscode/
+
+# Firebase
+.firebase/
+firebase-debug.log
+firebase-debug.*.log
