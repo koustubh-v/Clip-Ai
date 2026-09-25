@@ -52,6 +52,7 @@ jobs:
             --memory=4Gi
             --cpu=2
             --allow-unauthenticated
+            --no-cpu-throttling
 
   deploy-frontend:
     name: Deploy Frontend to Firebase Hosting

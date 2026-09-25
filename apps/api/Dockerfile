@@ -13,5 +13,9 @@ RUN pip install python-dotenv uvicorn
 # Copy application code
 COPY . .
 
+# Bake the Whisper model into the image so it doesn't download at runtime (avoids HF rate limits & speeds up boot)
+RUN python -c "from faster_whisper import WhisperModel; WhisperModel('base', device='cpu', compute_type='int8')"
+
 # Run the API
+ENV HF_HUB_OFFLINE=1
 CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8080"]
