@@ -81,6 +81,14 @@ jobs:
           node-version: 20
 
       - name: Install dependencies & Build
+        env:
+          VITE_FIREBASE_API_KEY: "AIzaSyBCCJn7jWIe10_lE89yE1dekJV_ZMME0Qc"
+          VITE_FIREBASE_AUTH_DOMAIN: "clipai-4bb71.firebaseapp.com"
+          VITE_FIREBASE_PROJECT_ID: "clipai-4bb71"
+          VITE_FIREBASE_STORAGE_BUCKET: "clipai-4bb71.firebasestorage.app"
+          VITE_FIREBASE_MESSAGING_SENDER_ID: "317418402807"
+          VITE_FIREBASE_APP_ID: "1:317418402807:web:b8165ac3403a7e5c0db4f2"
+          VITE_FIREBASE_MEASUREMENT_ID: "G-MVG49RQSMQ"
         run: |
           cd apps/web
           npm install
