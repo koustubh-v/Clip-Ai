@@ -49,8 +49,8 @@ jobs:
           secrets: |
             GOOGLE_API_KEY=GOOGLE_API_KEY:latest
           flags: |
-            --memory=4Gi
-            --cpu=2
+            --memory=8Gi
+            --cpu=8
             --allow-unauthenticated
             --no-cpu-throttling
 
